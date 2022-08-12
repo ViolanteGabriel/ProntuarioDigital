@@ -22,6 +22,7 @@ void imprime_menu()
     printf("(4) Remover Prontuario.\n");
     printf("(0) Finalizar o programa(sair).\n");
     printf("Insira a opcao desejada(numero): ");
+    
 }
 
 int main(int argc, char const *argv[])
@@ -41,7 +42,6 @@ int main(int argc, char const *argv[])
             break;
         
             case 2 :
-            // codigo
             break;
 
             case 3 :
@@ -49,7 +49,6 @@ int main(int argc, char const *argv[])
             break;
 
             case 4 :
-            // codigo
             break;
 
             case 0 :
@@ -57,12 +56,15 @@ int main(int argc, char const *argv[])
             break;
 
             default:
-            printf("Insira uma opcao valida!!\n\n");
+            printf("Insira uma opção valida.\n\n");
             break;
         }
+        
         // APERTAR UMA TECLA PARA VOLTAR AO MENU.
         system("pause");
+        
         // LIMPANDO O TERMINAL.
         system("cls");
+        
     }
 }
