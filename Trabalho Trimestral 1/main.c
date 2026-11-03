@@ -12,7 +12,7 @@
 #define SUCESSO         (0)
 #define ERRO            (1)
 
-void imprime_menu()
+void imprime_menu(void)
 {
     printf("\n\n---------------------------------\n|              MENU             |\n---------------------------------\n");
     printf("Opcoes:\n");
@@ -25,15 +25,23 @@ void imprime_menu()
     
 }
 
-int main(int argc, char const *argv[])
+int main(void)
 {
     int opcao = 1;
     char lixo;
     Arvore* arv = cria_arvore();
+    if (arv == NULL)
+    {
+        return ERRO;
+    }
     while (opcao != 0)
     {
         imprime_menu();
-        scanf("%d%c", &opcao, &lixo);
+        if (scanf("%d%c", &opcao, &lixo) != 2)
+        {
+            libera_arvore(arv);
+            return ERRO;
+        }
 
         switch (opcao)
         {
@@ -52,6 +60,7 @@ int main(int argc, char const *argv[])
             break;
 
             case 0 :
+            libera_arvore(arv);
             return SUCESSO;
             break;
 
@@ -60,11 +69,7 @@ int main(int argc, char const *argv[])
             break;
         }
         
-        // APERTAR UMA TECLA PARA VOLTAR AO MENU.
-        system("pause");
-        
-        // LIMPANDO O TERMINAL.
-        system("cls");
-        
     }
+    libera_arvore(arv);
+    return SUCESSO;
 }

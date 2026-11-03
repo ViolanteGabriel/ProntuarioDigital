@@ -1,0 +1,29 @@
+name: Compilacao e testes
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    name: ${{ matrix.os }} / C${{ matrix.c_standard }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        c_standard: [11, 17]
+    steps:
+      - name: Obter codigo
+        uses: actions/checkout@v6
+      - name: Configurar
+        run: cmake -S . -B build -DCMAKE_C_STANDARD=${{ matrix.c_standard }} -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON
+      - name: Compilar programa e testes
+        run: cmake --build build --config Release --parallel
+      - name: Executar testes de unidade
+        run: ctest --test-dir build -C Release --output-on-failure --no-tests=error

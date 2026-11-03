@@ -44,13 +44,15 @@ typedef No* Arvore;
 int verifica_data(int dia, int mes, int ano);
 
 // FUNCOES RELACIONADAS A LISTAS:
-Lista* cria_lista();
+Lista* cria_lista(void);
 int adiciona_consulta_prontuario(Lista* lista, Consulta informacoes);
 void mostra_lista(Lista* lista);
+void libera_lista(Lista* lista);
 
 // FUNCOES RELACIONADAS A ARVORES E:
-Arvore* cria_arvore();
+Arvore* cria_arvore(void);
 No* cria_no(char nome[], Consulta informacoes);
+void libera_arvore(Arvore* arv);
 
 // FUNCOES PRINCIPAIS:
 int consulta_paciente(Arvore* arv);
